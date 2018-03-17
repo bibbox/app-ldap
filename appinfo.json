@@ -1,0 +1,10 @@
+{
+		"name": "OpenLDAP",
+		"short_name": "OpenLDAP",
+		"version": "V.1.0",
+		"description": "OpenLDAP Software is an open source implementation of the Lightweight Directory Access Protocol.",
+        "short_description": "OpenLDAP Software is an open source implementation of the Lightweight Directory Access Protocol.",
+		"catalogue_url": "",
+		"application_url": "https://www.openldap.org/",
+		"tags": ["LDAP"]
+}
