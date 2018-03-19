@@ -1,0 +1,7 @@
+dn: olcDatabase=ldap,cn=config
+objectClass: olcLDAPConfig
+olcDatabase: ldap
+olcSuffix: ou=pers,ou=usr,o=mug
+olcDbURI: "ldap://ldap.medunigraz.at"
+
+

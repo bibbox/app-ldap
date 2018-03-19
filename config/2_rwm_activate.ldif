@@ -1,0 +1,10 @@
+dn: olcOverlay=rwm,olcDatabase={-1}frontend,cn=config
+objectClass: olcOverlayConfig
+objectClass: olcRwmConfig
+olcOverlay: rwm
+olcRwmRewrite: rwm-rewriteEngine "on"
+olcRwmRewrite: rwm-rewriteContext "bindDN"
+olcRwmRewrite: rwm-rewriteRule "^uid=(o_.+),ou=people,dc=ngslab$" "cn=$1,ou=pers,ou=usr,o=mug" ":@"
+olcRwmTFSupport: no
+olcRwmNormalizeMapped: FALSE
+

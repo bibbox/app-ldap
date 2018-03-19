@@ -1,0 +1,29 @@
+version: '2'
+
+services:
+
+  openldap:
+    image: debian:jessie
+    container_name:  openldap
+    command: tail -f /dev/null
+    depends_on:
+      - openldap-app-data
+    volumes_from: 
+      - openldap-app-data
+
+  phpLDAPadmin:
+    image: osixia/phpldapadmin
+    container_name: phpLDAPadmin
+    links:
+      - openldap:openldap
+    ports:
+      - "5380:80"
+      - "5443:443"
+    environment:
+      - PHPLDAPADMIN_LDAP_HOSTS=openldap
+      
+  openldap-app-data:
+    image: busybox
+    container_name: openldap-app-data
+    volumes:
+      - ./config:/opt/config
