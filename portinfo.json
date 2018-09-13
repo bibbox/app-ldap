@@ -7,13 +7,13 @@
       "proxy" : "PRIMARY"
     },
     {
-      "id": "§§PORT_389,
+      "id": "§§PORT_389",
       "url": "§§INSTANCE-ldap389",
       "protocol": "HTTP",
       "proxy" : "PRIMARY"
     },
     {
-      "id": "§§PORT_636,
+      "id": "§§PORT_636",
       "url": "§§INSTANCE-ldap636",
       "protocol": "HTTP",
       "proxy" : "PRIMARY"
