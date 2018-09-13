@@ -1,4 +1,4 @@
 {
-  runningcontainers:["§§INSTANCE-appcontainer1", "§§INSTANCE-appcontainer2"],
-  supportcontainers:["§§INSTANCE-app-data"]    
+  runningcontainers:["§§INSTANCE-openldap", "§§INSTANCE-phpldapadmin"],
+  supportcontainers:["§§INSTANCE-openldap-data"]
 }

@@ -1,16 +1,23 @@
 {
   "mappings": [
     {
-      "id": "§§PORT1",
+      "id": "§§PORT_80",
       "url": "§§INSTANCE",
       "protocol": "HTTP",
       "proxy" : "PRIMARY"
     },
     {
-      "id": "§§PORT2",
-      "url": "§§INSTANCE-monitoring",
+      "id": "§§PORT_389,
+      "url": "§§INSTANCE-ldap389",
+      "protocol": "HTTP",
+      "proxy" : "PRIMARY"
+    },
+    {
+      "id": "§§PORT_636,
+      "url": "§§INSTANCE-ldap636",
       "protocol": "HTTP",
       "proxy" : "PRIMARY"
     }
+
   ]
 }

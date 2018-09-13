@@ -5,56 +5,63 @@ networks:
       external: true
 
 services:
-
-  §§INSTANCE-container1:
-    image: bibbox/app-image
-    container_name:  §§INSTANCE-container1
-    restart: unless-stopped
-    networks:
-      - bibbox-default-network
-    links:
-      - §§INSTANCE-lapp-db:app-db
-    ports:
-      - "§§PORT1:80"
-    depends_on:
-      - §§INSTANCE-app-db
-      - §§INSTANCE-app-data
-    volumes_from: 
-      - §§INSTANCE-app-data
-
-§§INSTANCE-container2:
-  image: bibbox/app-image2
-  container_name:  §§INSTANCE-container2
-  restart: unless-stopped
-  networks:
-    - bibbox-default-network
-  ports:
-    - "§§PORT2:8000"
-  depends_on:
-    - §§INSTANCE-app-data
-  volumes_from: 
-    - §§INSTANCE-app-data
-
-  §§INSTANCE-app-db:
-    image: mysql:8
-    container_name: §§INSTANCE-imagename-db
-    restart: unless-stopped
-    networks:
-      - bibbox-default-network
-    user: root
+  §§INSTANCE-openldap:
+    image: osixia/openldap:1.2.2
+    container_name: §§INSTANCE-openldap
     environment:
-      - MYSQL_ROOT_PASSWORD=thispasswordisneverusededoutsidethecontainer
-      - MYSQL_DATABASE=§§MYSQL_DATABASE_NAME
-      - MYSQL_USER=§§MYSQL_DATABASE_USER
-      - MYSQL_PASSWORD=§§MYSQL_DATABASE_PASSWORD
-    volumes_from: 
-      - §§INSTANCE-app-data
+      LDAP_LOG_LEVEL: "256"
+      LDAP_ORGANISATION: "BIBBOX"
+      LDAP_DOMAIN: "silicolab.bibbox.org"
+      LDAP_BASE_DN: ""
+      LDAP_ADMIN_PASSWORD: "vendetta"
+      LDAP_CONFIG_PASSWORD: "config"
+      LDAP_READONLY_USER: "false"
+      #LDAP_READONLY_USER_USERNAME: "readonly"
+      #LDAP_READONLY_USER_PASSWORD: "readonly"
+      LDAP_RFC2307BIS_SCHEMA: "false"
+      LDAP_BACKEND: "mdb"
+      LDAP_TLS: "true"
+      LDAP_TLS_CRT_FILENAME: "ldap.crt"
+      LDAP_TLS_KEY_FILENAME: "ldap.key"
+      LDAP_TLS_CA_CRT_FILENAME: "ca.crt"
+      LDAP_TLS_ENFORCE: "false"
+      LDAP_TLS_CIPHER_SUITE: "SECURE256:-VERS-SSL3.0"
+      LDAP_TLS_PROTOCOL_MIN: "3.1"
+      LDAP_TLS_VERIFY_CLIENT: "demand"
+      LDAP_REPLICATION: "false"
+      #LDAP_REPLICATION_CONFIG_SYNCPROV: "binddn="cn=admin,cn=config" bindmethod=simple credentials=$LDAP_CONFIG_PASSWORD searchbase="cn=config" type=refreshAndPersist retry="60 +" timeout=1 starttls=critical"
+      #LDAP_REPLICATION_DB_SYNCPROV: "binddn="cn=admin,$LDAP_BASE_DN" bindmethod=simple credentials=$LDAP_ADMIN_PASSWORD searchbase="$LDAP_BASE_DN" type=refreshAndPersist interval=00:00:00:10 retry="60 +" timeout=1 starttls=critical"
+      #LDAP_REPLICATION_HOSTS: "#PYTHON2BASH:['ldap://ldap.example.org','ldap://ldap2.example.org']"
+      KEEP_EXISTING_CONFIG: "false"
+      LDAP_REMOVE_CONFIG_AFTER_SETUP: "true"
+      LDAP_SSL_HELPER_PREFIX: "ldap"
+    tty: true
+    stdin_open: true
     depends_on:
-      - §§INSTANCE-app-data
+       - §§INSTANCE-openldap-data
+    volumes_from:
+       - §§INSTANCE-openldap-data
+    ports:
+      - "§§PORT_389:389"
+      - "§§PORT_636:636"
+    domainname: "silicolab.bibbox.org" # important: same as hostname
+    hostname: "silicolab.bibbox.org"
 
-  §§INSTANCE-app-data:
-    image: busybox
-    container_name: §§INSTANCE-app-data
-    volumes:
-      - ./var/app-data:/var/app-data
-      - ./var/app-config:/var/app-config
+  §§INSTANCE-phpldapadmin:
+    image: osixia/phpldapadmin:latest
+    container_name: §§INSTANCE-phpldapadmin
+    environment:
+      PHPLDAPADMIN_LDAP_HOSTS: "§§INSTANCE-openldap"
+      PHPLDAPADMIN_HTTPS: "false"
+    ports:
+      - "§§PORT_80:80"
+    depends_on:
+      - §INSTANCE-openldap
+
+  §§INSTANCE-openldap-data:
+     image: busybox
+     container_name: §§§INSTANCE-openldap-data
+     volumes:
+      - ./data/var/lib/ldap:/var/lib/ldap
+      - ./data/etc/ldap/slapd.d:/etc/ldap/slapd.d
+      - .//data//container/service/slapd/assets/certs/:/container/service/slapd/assets/certs/
