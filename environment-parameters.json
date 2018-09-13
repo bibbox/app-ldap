@@ -1,39 +1,38 @@
 [
    {
-      "id":"NAME_AS_IN_DOCKER_TEMPLATE_1",
-      "display_name":"Name Displayed in GUI at the Installation",
+      "id":"LDAP_ORGANISATION",
+      "display_name":"LDAP organisation",
       "type":"text, number, password",
-      "default_value":"Default Value",
+      "default_value":"BIBBOX",
       "description":"Description shown in the GUI",
       "min_length": "1",
       "max_length": "128"
    },
    {
-      "id":"MYSQL_DATABASE_NAME",
-      "display_name":"Name of the mysql database",
+      "id":"LDAP_DOMAIN",
+      "display_name":"LDAP domain",
       "type":"text,",
-      "default_value":"Default Value",
+      "default_value":"bibbox.org",
       "description":"Description shown in the GUI",
       "min_length": "1",
       "max_length": "128"
    },
    {
-      "id":"MYSQL_DATABASE_USER",
-      "display_name":"Name of the mysql user",
+      "id":"LDAP_ADMIN_PASSWORD",
+      "display_name":"LDAP admin password",
       "type":"text",
-      "default_value":"Default Value",
+      "default_value":"vendetta",
       "description":"Description shown in the GUI",
       "min_length": "1",
       "max_length": "128"
    },
    {
-      "id":"MYSQL_DATABASE_PASSWORD",
-      "display_name":"Password of mySQL user",
-      "type":"password",
-      "default_value":"Default Value",
+      "id":"LDAP_CONFIG_PASSWORD",
+      "display_name":"LDAP config password",
+      "type":"text",
+      "default_value":"vendetta",
       "description":"Description shown in the GUI",
       "min_length": "1",
       "max_length": "128"
    }
-
 ]

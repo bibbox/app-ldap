@@ -10,11 +10,11 @@ services:
     container_name: §§INSTANCE-openldap
     environment:
       LDAP_LOG_LEVEL: "256"
-      LDAP_ORGANISATION: "BIBBOX"
-      LDAP_DOMAIN: "silicolab.bibbox.org"
+      LDAP_ORGANISATION: "§§LDAP_ORGANISATION:"
+      LDAP_DOMAIN: "§§LDAP_DOMAIN"
       LDAP_BASE_DN: ""
-      LDAP_ADMIN_PASSWORD: "vendetta"
-      LDAP_CONFIG_PASSWORD: "config"
+      LDAP_ADMIN_PASSWORD:  "§§LDAP_ADMIN_PASSWORD"
+      LDAP_CONFIG_PASSWORD: "§§LDAP_ADMIN_PASSWORD"
       LDAP_READONLY_USER: "false"
       #LDAP_READONLY_USER_USERNAME: "readonly"
       #LDAP_READONLY_USER_PASSWORD: "readonly"
@@ -44,8 +44,6 @@ services:
     ports:
       - "§§PORT_389:389"
       - "§§PORT_636:636"
-    domainname: "silicolab.bibbox.org" # important: same as hostname
-    hostname: "silicolab.bibbox.org"
 
   §§INSTANCE-phpldapadmin:
     image: osixia/phpldapadmin:latest
