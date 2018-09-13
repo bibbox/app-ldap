@@ -60,7 +60,7 @@ services:
 
   §§INSTANCE-openldap-data:
      image: busybox
-     container_name: §§§INSTANCE-openldap-data
+     container_name: §§INSTANCE-openldap-data
      volumes:
       - ./data/var/lib/ldap:/var/lib/ldap
       - ./data/etc/ldap/slapd.d:/etc/ldap/slapd.d
