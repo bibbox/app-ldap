@@ -56,7 +56,7 @@ services:
     ports:
       - "§§PORT_80:80"
     depends_on:
-      - §INSTANCE-openldap
+      - §§INSTANCE-openldap
 
   §§INSTANCE-openldap-data:
      image: busybox
